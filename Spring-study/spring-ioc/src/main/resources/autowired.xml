@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="com.ydlclass.Adress" name="adress2" />
+
+    <bean name="user" class="com.ydlclass.User" autowire="byType" scope="prototype">
+        <property name="name" value="meng"/>
+        <property name="age" value="20"/>
+
+        <property name="friends">
+            <list>
+                <value>哲</value>
+                <value>冰</value>
+            </list>
+        </property>
+        <property name="hobby">
+            <array>
+                <value>basketball</value>
+                <value>play</value>
+            </array>
+        </property>
+        <property name="parents">
+            <map>
+                <entry key="mother" value="mo"/>
+                <entry key="father" value="fa"/>
+            </map>
+        </property>
+    </bean>
+</beans>

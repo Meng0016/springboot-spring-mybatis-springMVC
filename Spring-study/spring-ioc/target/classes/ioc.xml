@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<!--
+    <bean id="userDao" name="dao,dao2" class="com.ydlclass.UserDao">
+
+    </bean>-->
+    <!--<bean name="userDao" class="com.ydlclass.UserDao">
+
+    </bean>
+    <alias name="userDao" alias="userDao2"/>-->
+
+    <!--<bean name="userService" class="com.ydlclass.UserService"
+          factory-method="create">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+    <bean name="userDao" factory-bean="userService" factory-method="create2"/>-->
+
+    <bean class="com.ydlclass.UserDao" name="userDao"/>
+    <bean class="com.ydlclass.AdressDao" name="adressDao"/>
+
+    <bean name="userService" class="com.ydlclass.UserService">
+        <constructor-arg name="adressDao" ref="adressDao"/>
+        <!--<constructor-arg name="userDao" ref="userDao"/>-->
+        <property name="userDao" ref="userDao"/>
+       <!-- <property name="adressDao" ref="adressDao"/>-->
+    </bean>
+    <bean class="com.ydlclass.Adress" name="adress"/>
+    <bean name="user" class="com.ydlclass.User">
+        <property name="name" value="meng"/>
+        <property name="age" value="20"/>
+        <property name="adress" ref="adress"/>
+        <property name="friends">
+            <list>
+                <value>哲</value>
+                <value>冰</value>
+            </list>
+        </property>
+        <property name="hobby">
+            <array>
+                <value>basketball</value>
+                <value>play</value>
+            </array>
+        </property>
+        <property name="parents">
+            <map>
+                <entry key="mother" value="mo"/>
+                <entry key="father" value="fa"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean name="a" class="com.ydlclass.User" p:name="m" p:age="10" >
+
+    </bean>
+<bean class="com.alibaba.druid.pool.DruidDataSource">
+
+</bean>
+   <!-- <beans profile="prod">
+
+    </beans>
+    <beans profile="dev">
+
+    </beans>-->
+</beans>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+<!--    <aop:aspectj-autoproxy/>-->
+
+    <bean id="myAop" class="com.ydlclass.aspectj.MyAop"/>
+    <bean id="orderService" class="com.ydlclass.service.impl.OrderService"/>
+    <bean id="userService" class="com.ydlclass.service.impl.UserService"/>
+
+    <aop:config>
+        <!--<aop:aspect id="myAspect" ref="myAop">
+            <aop:pointcut id="pointcut" expression="execution(* com.ydlclass..*(..))"/>
+            <aop:before pointcut="execution(* com.ydlclass..*(..))" method="beforeAdvice"/>
+            <aop:after-returning method="afterReturningAdvice" pointcut="execution(* com.ydlclass..*(..))"/>
+            <aop:after-throwing method="afterThrowingAdvice" pointcut="execution(* com.ydlclass..*(..))" throwing="ex"/>
+            <aop:after pointcut="execution(* com.ydlclass..*(..))" method="afterAdvice"/>
+            <aop:around method="aroundAdvice" pointcut="execution(* com.ydlclass..*(..)) and args(money,..)"/>
+
+        </aop:aspect>-->
+        <aop:pointcut id="pointcut" expression="execution(* com.ydlclass..*(..))"/>
+        <aop:advisor advice-ref="" pointcut-ref="pointcut"/>
+    </aop:config>
+</beans>

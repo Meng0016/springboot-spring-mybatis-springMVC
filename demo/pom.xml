@@ -5,6 +5,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>shiro</module>
+        <module>JWT</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

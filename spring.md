@@ -1,7 +1,5 @@
 # Spring教程
 
-> B站：IT楠老师 微信号： itnanls 网站：www.ydlclass.com
-
 ## [#](https://www.ydlclass.com/doc21xnv/frame/spring/#第一章-概述)第一章 概述
 
 **创始人**：Rod Johnson，Java和J2EE开发领域的专家，Spring框架的创始人，同时也是SpringSource的联合创始人。

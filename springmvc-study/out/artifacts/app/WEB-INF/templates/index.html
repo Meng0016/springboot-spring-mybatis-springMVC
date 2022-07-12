@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<!--<ul th:each="user : ${users}">
+    <li th:text="${user.username}"></li>
+    <li th:text="${user.password}"></li>
+</ul>-->
+<h1 th:text="${msg}"></h1>
+<h1 th:text="${abc}"></h1>
+<table>
+    <thead>
+    <tr>
+        <th>书籍编号</th>
+        <th>书籍名称</th>
+        <th>书籍作者</th>
+        <th>书籍出版社</th>
+    </tr>
+
+    </thead>
+    <tbody>
+    <tr th:each="book : ${booklist}">
+        <td th:text="${book.id}"></td>
+        <td th:text="${book.bookname}"></td>
+        <td th:text="${book.bookauthor}"></td>
+        <td th:text="${book.getBookpublish()}"></td>
+
+
+    </tr>
+
+    </tbody>
+</table>
+
+</body>
+</html>

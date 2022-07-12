@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html,charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+商品页面
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+    const instance = axios.create({
+        baseURL: 'http://127.0.0.1:8080/app/'
+    });
+    // 为给定 ID 的 user 创建请求
+    instance.get('goods')
+        .then(function (response) {
+            console.log(response);
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+
+    instance.get('goods/1')
+        .then(function (response) {
+            console.log(response);
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+
+
+    instance.put('goods', {
+        name: '洗发露',
+        price: 20000
+        }).then(function (response) {
+            console.log(response);
+        }).catch(function (error) {
+            console.log(error);
+        });
+
+
+    instance.post('goods/1', {
+        name: '洗发露',
+        price: 20000
+    }).then(function (response) {
+        console.log(response);
+    }).catch(function (error) {
+        console.log(error);
+    });
+
+
+    instance.delete('goods/1')
+        .then(function (response) {
+            console.log(response);
+        }).catch(function (error) {
+        console.log(error);
+    });
+</script>
+</body>
+</html>

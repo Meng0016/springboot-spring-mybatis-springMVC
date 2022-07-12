@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ydlclass.dao.BookDao">
+    <resultMap id="bookmap" type="com.ydlclass.entity.Book">
+        <result column="book_name" property="bookname"/>
+        <result column="book_author" property="bookauthor"/>
+        <result column="book_publish" property="bookpublish"/>
+    </resultMap>
+
+    <select id="selectAll" resultMap="bookmap">
+        select * from book
+    </select>
+    <insert id="batchinsert" parameterType="list" >
+        insert into book (book_name,book_author,book_publish)
+        value
+        <foreach collection="books" item="book" separator=",">
+            (#{book.bookname},#{book.bookauthor},#{book.bookpublish})
+        </foreach>
+    </insert>   <!--批量插入还没用-->
+    <select id="select" resultMap="bookmap">
+        select * from book
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="bookname != null and bookname !=''">
+                and book_name = #{bookname}
+            </if>
+            <if test="bookauthor != null and bookauthor !=''">
+                and book_author = #{bookauthor}
+            </if>
+            <if test="bookpublish != null and bookpublish !=''">
+                and book_publish = #{bookpublish}
+            </if>
+        </where>
+    </select>
+    <insert id="insert">
+        insert into book (id,book_name,book_author,book_publish)
+        values (#{id},#{bookname},#{bookauthor},#{bookpublish})
+    </insert>
+    <update id="update">
+        update book set book_name=#{bookname},book_author=#{bookauthor},book_publish=#{bookpublish} where id =#{id}
+    </update>
+    <!--<update id="update">
+        update book
+        <set>
+            <if test="bookname != null and bookname != ''">
+                book_name=#{bookname}
+            </if>
+            <if test="bookauthor != null and bookauthor!= ''" >
+                book_author=#{bookauthor}
+            </if>
+            <if test="bookpublish != null and bookpublish != ''">
+                book_publish=#{bookpublish}
+        </if>
+        </set>
+        where id = #{id}
+    </update>-->
+    <delete id="delete">
+        DELETE FROM book WHERE id = #{id}
+    </delete>
+
+    <delete id="batchdeleteByIds">
+        delete from book where id in 
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+        #{id}
+        </foreach>
+    </delete>
+    <select id="selectbyid" resultMap="bookmap">
+        select * from book where id = #{id}
+    </select>
+    <insert id="insertNoId">
+        insert into book (book_name,book_author,book_publish)
+        values (#{bookname},#{bookauthor},#{bookpublish})
+    </insert>
+</mapper>

@@ -1,0 +1,11 @@
+###
+POST http://localhost:8080/springmvc_ydlclass_war_exploded/user/insertUser
+Content-Type: application/json
+
+{"username": "tom","password": "21134"}
+
+###
+POST http://localhost:8080/springmvc_ydlclass_war_exploded/user/insert
+Content-Type: application/x-www-form-urlencoded
+
+username=tom&password=15165&birthday=2002-2-5&phone=15566542150&email=66sda&age=500

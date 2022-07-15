@@ -20,4 +20,9 @@ public class LoginController {
         //模拟登录
         return loginService.login(user);
     }
+
+    @RequestMapping("/user/logout")
+    public ResponseResult logout(){
+        return loginService.logout();
+    }
 }

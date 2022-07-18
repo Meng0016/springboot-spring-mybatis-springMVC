@@ -9,8 +9,17 @@ public class HelloController {
 
 
     @RequestMapping("/hello")
-    @PreAuthorize("hasAnyAuthority('test')") //拥有test权限才能访问
+    @PreAuthorize("hasAnyAuthority('system:dept:list','test')") //拥有test权限才能访问
     public String hello() {
         return "Hello Token";
     }
+
+    @RequestMapping("/hello1")
+    @PreAuthorize("@ex.hasAuthority('system:dept:list')") //拥有test权限才能访问
+    public String hello1() {
+        return "Hello Token1";
+    }
+
 }
+
+

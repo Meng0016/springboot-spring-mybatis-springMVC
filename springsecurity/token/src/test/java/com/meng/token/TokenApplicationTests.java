@@ -1,5 +1,6 @@
 package com.meng.token;
 
+import com.meng.token.mapper.MenuMapper;
 import com.meng.token.mapper.UserMapper;
 import com.meng.token.pojo.User;
 import org.junit.jupiter.api.Test;
@@ -20,6 +21,14 @@ class TokenApplicationTests {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private MenuMapper menuMapper;
+
+    @Test
+    public void testSelectPermsByUserId() {
+        List<String> list = menuMapper.selectPermsByUserId(2);
+        System.out.println(list);
+    }
 
     @Test
     void TestBCryptpassword() {

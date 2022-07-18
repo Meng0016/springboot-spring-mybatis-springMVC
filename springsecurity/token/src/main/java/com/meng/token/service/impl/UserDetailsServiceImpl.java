@@ -2,6 +2,7 @@ package com.meng.token.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.meng.token.controller.LoginUser;
+import com.meng.token.mapper.MenuMapper;
 import com.meng.token.mapper.UserMapper;
 import com.meng.token.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private MenuMapper menuMapper;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //查询用户信息
@@ -32,7 +36,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new RuntimeException("用户名密码错误");
         }
         // TODO 查询对应权限信息
-        List<String> list =new ArrayList<>(Arrays.asList("test","admin"));
+//        List<String> list =new ArrayList<>(Arrays.asList("test","admin"));
+        List<String> list = menuMapper.selectPermsByUserId(user.getId());
         //把用户数据封装成UserDetails返回
 
         return new LoginUser(user,list);

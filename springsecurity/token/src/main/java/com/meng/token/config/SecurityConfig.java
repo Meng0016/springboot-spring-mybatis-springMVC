@@ -1,6 +1,7 @@
 package com.meng.token.config;
 
 import com.meng.token.filter.JwtAuthenticationTokenFilter;
+import com.meng.token.handler.AuthenticationEntryPointImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -25,6 +28,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
 
+    @Autowired
+    private AuthenticationEntryPoint authenticationEntryPoint;
+
+    @Autowired
+    private AccessDeniedHandler accessDeniedHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -37,6 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 // 允许所有用户访问的接口
                 .antMatchers("/user/login").anonymous()
+                .antMatchers("/testcors").hasAnyAuthority("system:dept:list")
                 // 除了上面接口外q全部需要鉴权认证
                 .anyRequest().authenticated();
 
@@ -45,8 +55,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/hello").anonymous()
 //                .anyRequest().authenticated()
 //                .and().addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
-
+        //添加过滤器
         http.addFilterBefore(jwtAuthenticationTokenFilter,UsernamePasswordAuthenticationFilter.class);
+
+        //配置异常处理
+        http.exceptionHandling()
+                //认证异常处理
+                .authenticationEntryPoint(authenticationEntryPoint)
+                .accessDeniedHandler(accessDeniedHandler);
+
+        //允许跨域
+        http.cors();
     }
 
     @Bean
